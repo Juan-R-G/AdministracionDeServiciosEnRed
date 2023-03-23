@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from agregarDispositivo import AddDev
 
 
 class Main:
@@ -30,7 +31,14 @@ class Main:
 
     def seleccion(self):
         if self.eleccion.get() == 1:
-            print("xd")
+            self.menu.destroy()
+            AddDev()
+        elif self.eleccion.get() == 2:
+            print("C")
+        elif self.eleccion.get() == 3:
+            print("E")
+        else:
+            print("R")
 
 
-main = Main()
+Main()
