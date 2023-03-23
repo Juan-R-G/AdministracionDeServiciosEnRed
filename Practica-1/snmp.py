@@ -30,7 +30,7 @@ def consulta12(community, ip, port):
 print(consulta11("comunidadASR", "localhost", "161"))
 # Linux -> split() -> Linux[0] VersionKernel[2] VersionLinux[3].split("~")[1].split("-") <- Dist-Version
 print(consulta11("comunidadWinASR", "172.100.71.129", "161"))
-# Windows -> split(" - ")
+# Windows -> split(" - ")[1].split(": ")[1].split(" (")[0]
 print(consulta12("comunidadASR", "localhost", "161"))
 # SNMP Version - OID
 print(consulta12("comunidadWinASR", "172.100.71.129", "161"))
