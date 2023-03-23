@@ -11,7 +11,7 @@ def consulta11(community, ip, port):
         r = []
         for var_bind in var_binds:
             r = [var.prettyPrint() for var in var_bind]
-        return r[1].split()
+        return r[1]
 
 
 def consulta12(community, ip, port):
@@ -28,7 +28,9 @@ def consulta12(community, ip, port):
 
 
 print(consulta11("comunidadASR", "localhost", "161"))
-# SO - User - Version Kernel - VersionUbuntu - Otros(2) - Fecha?(6) - Arquitectura
-# Windows
+# Linux -> split() -> Linux[0] VersionKernel[2] VersionLinux[3].split("~")[1].split("-") <- Dist-Version
+print(consulta11("comunidadWinASR", "172.100.71.129", "161"))
+# Windows -> split(" - ")
 print(consulta12("comunidadASR", "localhost", "161"))
 # SNMP Version - OID
+print(consulta12("comunidadWinASR", "172.100.71.129", "161"))

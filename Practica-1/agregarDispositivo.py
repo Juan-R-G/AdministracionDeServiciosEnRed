@@ -47,7 +47,7 @@ class AddDev:
             if not os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
                 os.mkdir(os.path.join(os.getcwd(), "Dispositivos"))
             file = open(os.path.join(os.getcwd(), "Dispositivos", ip + ".txt"), "w")
-            file.write("ip:" + ip + "\nver:" + ver + "\ncomm:" + comm + "\nport:" + port)
+            file.write("ip:" + ip + "-ver:" + ver + "-comm:" + comm + "-port:" + port)
             file.close()
             self.menu.destroy()
 
