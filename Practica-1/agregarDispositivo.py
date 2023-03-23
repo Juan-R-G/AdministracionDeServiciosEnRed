@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import os
 
 
 class AddDev:
@@ -42,6 +43,12 @@ class AddDev:
             self.lbl5.grid(columnspan=2, row=5)
         else:
             self.lbl5.destroy()
+            if not os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
+                os.mkdir(os.path.join(os.getcwd(), "Dispositivos"))
+            file = open(os.path.join(os.getcwd(), "Dispositivos", ip + ".txt"), "w")
+            file.write("ip:" + ip + "\nver:" + ver + "\ncomm:" + comm + "\nport:" + port)
+            file.close()
+            self.menu.destroy()
 
 
-AddDev()
+# AddDev()

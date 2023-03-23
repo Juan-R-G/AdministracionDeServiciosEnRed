@@ -33,6 +33,7 @@ class Main:
         if self.eleccion.get() == 1:
             self.menu.destroy()
             AddDev()
+            Main()
         elif self.eleccion.get() == 2:
             print("C")
         elif self.eleccion.get() == 3:
