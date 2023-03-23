@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import os
+from snmp import *
 
 
 class AddDev:
