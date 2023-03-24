@@ -23,7 +23,7 @@ class ChInfo:
             if len(self.devices) > 0:
                 self.flag = True
         if self.flag:
-            self.lbl0 = ttk.Label(self.frm, text="Seleccione un Dispositivo")
+            self.lbl0 = ttk.Label(self.frm, text="Seleccione un Dispositivo:")
         else:
             self.lbl0 = ttk.Label(self.frm, text="No hay dispositivos guardados...")
         self.lbl0.grid(columnspan=2, row=0)
@@ -48,7 +48,7 @@ class ChInfo:
             self.btn1 = ttk.Button(self.frm, text="Guardar", command=lambda: self.actualizar(), state=DISABLED)
             self.btn1.grid(columnspan=2, row=self.c+5)
         else:
-            self.btn1 = ttk.Button(self.frm, text="Continuar")
+            self.btn1 = ttk.Button(self.frm, text="Continuar", command=lambda: self.menu.destroy())
             self.btn1.grid(column=0, row=1)
         self.lbl5 = ttk.Label()
         self.menu.mainloop()
