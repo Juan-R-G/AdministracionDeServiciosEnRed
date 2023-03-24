@@ -27,7 +27,7 @@ class AddDev:
         self.ent3 = ttk.Entry(self.frm, width=30)
         self.ent3.insert(0, "comunidadASR")
         self.ent3.grid(column=1, row=2)
-        self.lbl4 = ttk.Label(self.frm, text="Puerto")
+        self.lbl4 = ttk.Label(self.frm, text="Puerto:")
         self.lbl4.grid(column=0, row=3)
         self.ent4 = ttk.Entry(self.frm, width=30)
         self.ent4.insert(0, "161")
