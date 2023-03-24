@@ -36,7 +36,7 @@ class DelDev:
                 self.radioButtons[self.c-1].grid(column=0, row=self.c)
         self.btn1 = ttk.Button()
         if self.flag:
-            self.btn1 = ttk.Button(self.frm, text="Eliminar", state=DISABLED)
+            self.btn1 = ttk.Button(self.frm, text="Eliminar", command=lambda: self.eliminar(), state=DISABLED)
             self.btn1.grid(column=0, row=self.c+1)
         else:
             self.btn1 = ttk.Button(self.frm, text="Continuar", command=lambda: self.menu.destroy())
@@ -44,7 +44,9 @@ class DelDev:
         self.menu.mainloop()
 
     def eliminar(self):
-        pass
+        os.remove(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"))
+        self.menu.destroy()
+        messagebox.showinfo("Eliminar Dispositivo", "Se ha eliminado el dispositivo correctamente")
 
 
-DelDev()
+# DelDev()
