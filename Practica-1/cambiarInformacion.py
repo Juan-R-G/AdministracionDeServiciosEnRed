@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import os
 from snmp import *
 
@@ -139,6 +140,7 @@ class ChInfo:
                 file.write("\nOcurrio un error al obtener los datos...")
             file.close()
             self.menu.destroy()
+            messagebox.showinfo("Cambiar Informacion", "Se han actualizado correctamente los datos del dispositivo")
 
 
 # ChInfo()
