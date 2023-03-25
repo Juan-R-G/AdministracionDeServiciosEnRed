@@ -56,7 +56,7 @@ class ChInfo:
     def enable(self):
         self.btn1.state(["!disabled"])
         file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
-        t = file.readline()
+        t = file.readline().replace("\n", "")
         file.close()
         t = t.split("-")
         x = t[0].split(":")

@@ -31,5 +31,21 @@ class Report:
         self.c = 0
         if self.flag:
             for name in self.devices:
-                self.radioButtons.append(ttk.Radiobutton(self.frm, text=name, value=name, variable=name))
+                self.radioButtons.append(ttk.Radiobutton(self.frm, text=name, value=name, variable=self.eleccion, command=lambda: self.btn1.state(["!disabled"])))
+                self.c += 1
+                self.radioButtons[self.c-1].grid(column=0, row=self.c)
+        self.btn1 = ttk.Button()
+        if self.flag:
+            self.btn1 = ttk.Button(self.frm, text="Generar", command=lambda: self.generar(), state=DISABLED)
+            self.btn1.grid(column=0, row=self.c+1)
+        else:
+            self.btn1 = ttk.Button(self.frm, text="Continuar", command=lambda: self.menu.destroy())
+            self.btn1.grid(column=0, row=1)
         self.menu.mainloop()
+
+    def generar(self):
+        file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
+        content = [f.replace("\n", "") for f in file]
+        file.close()
+        for c in content:
+            print(c)
