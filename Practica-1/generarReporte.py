@@ -47,5 +47,11 @@ class Report:
         file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
         content = [f.replace("\n", "") for f in file]
         file.close()
-        for c in content:
-            print(c)
+        info = []
+        t = content[0].split("-")
+        x = t[0].split(":")
+        info.append("IP: " + x[1])
+        x = t[2].split(":")
+        info.append("Comunidad: " + x[1])
+        for i in info:
+            print(i)
