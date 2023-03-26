@@ -1,3 +1,4 @@
+# Roldan Gomez Juan
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -48,7 +49,7 @@ class Report:
         file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
         content = [f.replace("\n", "") for f in file]
         file.close()
-        title = ["Administración de Servicios en Red", "Práctica 1", "Juan Roldán Gómez     4CM14"]
+        title = ["Administración de Servicios en Red", "Práctica 1", "Juan Roldán Gómez            4CM14"]
         info = []
         t = content[0].split("-")
         x = t[0].split(":")
