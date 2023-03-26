@@ -48,7 +48,7 @@ class Report:
         file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
         content = [f.replace("\n", "") for f in file]
         file.close()
-        title = "Administración de Servicios en Red\nPráctica 1\nJuan Roldán Gómez\t\t4CM14"
+        title = ["Administración de Servicios en Red", "Práctica 1", "Juan Roldán Gómez     4CM14"]
         info = []
         t = content[0].split("-")
         x = t[0].split(":")
@@ -66,12 +66,12 @@ class Report:
         t = content[4].split(":")
         info.append(t[0] + ": " + t[1])
         t = content[5].split(":")
-        info.append("\n" + t[0] + "(" + t[1] + "):")
+        info.append(t[0] + "(" + t[1] + "):")
         image = ""
         if "Windows" in content[1]:
             image = os.path.join(os.getcwd(), "Images", "windows.png")
         else:
-            image = os.path.join(os.getcwd(), "Images", "linux.png")
+            image = os.path.join(os.getcwd(), "Images", "linux.jpg")
         table = [["Interfaz", "Estado Administrativo"]]
         t = content[6].split("-")
         for v in t:
