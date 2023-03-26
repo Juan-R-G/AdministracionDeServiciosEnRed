@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import os
+from canvas import pdf
 
 
 class Report:
@@ -83,3 +84,12 @@ class Report:
                 table.append([x[0], "Down"])
             else:
                 table.append([x[0], "Testing"])
+        if not os.path.exists(os.path.join(os.getcwd(), "Reportes")):
+            os.mkdir(os.path.join(os.getcwd(), "Reportes"))
+        fname = os.path.join(os.getcwd(), "Reportes", "Reporte-" + self.eleccion.get() + ".pdf")
+        msg = pdf(fname, title, info, image, table)
+        self.menu.destroy()
+        if "error" in msg:
+            messagebox.showerror("Generar Reporte", msg)
+        else:
+            messagebox.showinfo("Generar Reporte", msg)
