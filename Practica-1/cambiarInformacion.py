@@ -98,6 +98,7 @@ class ChInfo:
             self.lbl5.grid(columnspan=2, row=self.c+2)
         else:
             self.lbl5.destroy()
+            os.remove(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"))
             file = open(os.path.join(os.getcwd(), "Dispositivos", ip + ".txt"), "w")
             file.write("ip:" + ip + "-ver:" + ver + "-comm:" + comm + "-port:" + port)
             try:

@@ -47,11 +47,25 @@ class Report:
         file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
         content = [f.replace("\n", "") for f in file]
         file.close()
+        title = "Administración de Servicios en Red\nPráctica 1\nJuan Roldán Gómez\t\t4CM14"
         info = []
         t = content[0].split("-")
         x = t[0].split(":")
         info.append("IP: " + x[1])
         x = t[2].split(":")
         info.append("Comunidad: " + x[1])
-        for i in info:
-            print(i)
+        t = content[1].split("_")
+        for v in t:
+            x = v.split(":")
+            info.append(x[0] + ": " + x[1])
+        t = content[2].split(":")
+        info.append(t[0] + ": " + t[1])
+        t = content[3].split(":")
+        info.append(t[0] + ": " + t[1])
+        t = content[4].split(":")
+        info.append(t[0] + ": " + t[1])
+        t = content[5].split(":")
+        info.append("\n" + t[0] + "(" + t[1] + "):")
+        image = ""
+        if "Windows" in content[1]:
+            image = ""
