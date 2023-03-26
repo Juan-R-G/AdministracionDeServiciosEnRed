@@ -68,4 +68,18 @@ class Report:
         info.append("\n" + t[0] + "(" + t[1] + "):")
         image = ""
         if "Windows" in content[1]:
-            image = ""
+            image = os.path.join(os.getcwd(), "Images", "windows.png")
+        else:
+            image = os.path.join(os.getcwd(), "Images", "linux.png")
+        table = [["Interfaz", "Estado Administrativo"]]
+        t = content[6].split("-")
+        for v in t:
+            if '¡' in v:
+                continue
+            x = v.split(":")
+            if int(x[1]) == 1:
+                table.append([x[0], "Up"])
+            elif int(x[1]) == 2:
+                table.append([x[0], "Down"])
+            else:
+                table.append([x[0], "Testing"])
