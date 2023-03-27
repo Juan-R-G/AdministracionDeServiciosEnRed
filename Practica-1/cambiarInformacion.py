@@ -115,7 +115,7 @@ class ChInfo:
                 elif "Windows" in t:
                     t = t.split(" - ")
                     t = t[1].split(":")
-                    t = t.split()
+                    t = t[1].split()
                     file.write("\nSistema Operativo:" + t[0])
                     file.write("_Version:" + t[1])
                 t = consulta15(comm, ip, port)
@@ -135,17 +135,19 @@ class ChInfo:
                 for x in a:
                     i = consulta221(comm, ip, port, str(x))
                     t = consulta222(comm, ip, port, i)
+                    print(t)
                     file.write("-" + t + ":")
                     t = consulta227(comm, ip, port, i)
                     file.write(t)
                 file.close()
                 self.menu.destroy()
                 messagebox.showinfo("Cambiar Informacion", "Se han actualizado correctamente los datos del dispositivo")
-            except:
+            except Exception as e:
+                print(e)
                 file.write("\nOcurrio un error al obtener los datos...")
                 file.close()
                 self.menu.destroy()
-                messagebox.showinfo("Cambiar Informacion", "Ocurrio un error al obtener los datos...")
+                messagebox.showerror("Cambiar Informacion", "Ocurrio un error al obtener los datos...")
 
 
 # ChInfo()

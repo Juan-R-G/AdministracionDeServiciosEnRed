@@ -88,11 +88,7 @@ class AddDev:
                 for x in a:
                     i = consulta221(comm, ip, port, str(x))
                     t = consulta222(comm, ip, port, i)
-                    if "0x" in t:
-                        t = t.replace("0x", "")
-                        t = bytes.fromhex(t).decode('utf-8')
-                        t.replace("\00", "")
-                        print(t)
+                    print(t)
                     file.write("-" + t + ":")
                     t = consulta227(comm, ip, port, i)
                     file.write(t)
