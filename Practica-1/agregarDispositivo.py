@@ -89,6 +89,7 @@ class AddDev:
                     i = consulta221(comm, ip, port, str(x))
                     t = consulta222(comm, ip, port, i)
                     print(t)
+
                     file.write("-" + t + ":")
                     t = consulta227(comm, ip, port, i)
                     file.write(t)
