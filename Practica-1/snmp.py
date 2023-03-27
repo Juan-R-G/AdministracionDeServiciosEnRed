@@ -118,4 +118,5 @@ def consulta227(community, ip, port, iid):  # Estado Administrativo de Interfaz
 # print(consulta16("comunidadWinASR", "172.100.71.129", "161"))
 # print(consulta21("comunidadASR", "localhost", "161"))
 # print(consulta222("comunidadASR", "localhost", "161", consulta221("comunidadASR", "localhost", "161", "2")))
+# print(consulta222("comunidadWinASR", "172.100.71.129", "161", consulta221("comunidadASR", "localhost", "161", "2")))
 # print(consulta227("comunidadASR", "localhost", "161", consulta221("comunidadASR", "localhost", "161", "2")))

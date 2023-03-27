@@ -91,14 +91,20 @@ class AddDev:
                     if "0x" in t:
                         t = t.replace("0x", "")
                         t = bytes.fromhex(t).decode('utf-8')
+                        t.replace("\00", "")
+                        print(t)
                     file.write("-" + t + ":")
                     t = consulta227(comm, ip, port, i)
                     file.write(t)
-            except:
+                file.close()
+                self.menu.destroy()
+                messagebox.showinfo("Agregar Dispositivo", "Se ha agregado el dispositivo correctamente!")
+            except Exception as e:
+                print(e)
                 file.write("\nOcurrio un error al obtener los datos...")
-            file.close()
-            self.menu.destroy()
-            messagebox.showinfo("Agregar Dispositivo", "Se ha agregado el dispositivo correctamente!")
+                file.close()
+                self.menu.destroy()
+                messagebox.showerror("Agregar Dispositivo", "Ocurrio un error al obtener los datos...")
 
 
 # AddDev()

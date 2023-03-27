@@ -138,11 +138,14 @@ class ChInfo:
                     file.write("-" + t + ":")
                     t = consulta227(comm, ip, port, i)
                     file.write(t)
+                file.close()
+                self.menu.destroy()
+                messagebox.showinfo("Cambiar Informacion", "Se han actualizado correctamente los datos del dispositivo")
             except:
                 file.write("\nOcurrio un error al obtener los datos...")
-            file.close()
-            self.menu.destroy()
-            messagebox.showinfo("Cambiar Informacion", "Se han actualizado correctamente los datos del dispositivo")
+                file.close()
+                self.menu.destroy()
+                messagebox.showinfo("Cambiar Informacion", "Ocurrio un error al obtener los datos...")
 
 
 # ChInfo()
