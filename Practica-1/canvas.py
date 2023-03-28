@@ -16,7 +16,7 @@ def pdf(path, title, info, image, table):
             y -= 25
         y -= 40
         mycanvas.setFont('Helvetica', 14)
-        mycanvas.drawImage(image, x+290, y-100, width=235, height=137)
+        mycanvas.drawImage(image, x+290, y-95, width=235, height=137)
         for i in info:
             mycanvas.drawString(x, y, i)
             y -= 23

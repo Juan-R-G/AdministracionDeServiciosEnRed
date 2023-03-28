@@ -10,7 +10,6 @@ class AddDev:
     def __init__(self):
         self.menu = Tk()
         self.menu.title("Agregar Dispositivo")
-        # self.menu.geometry("750x440")
         self.menu.resizable(False, False)
         self.frm = ttk.Frame(self.menu, padding=10)
         self.frm.grid()
@@ -61,10 +60,6 @@ class AddDev:
                     t = t.split()
                     file.write("\nSistema Operativo:" + t[0])
                     file.write("_Version:" + t[2])
-                    # t = t[3].split("~")
-                    # t = t[1].split("-")
-                    # file.write("_Distribucion:" + t[1])
-                    # file.write("_Version:" + t[0])
                 elif "Windows" in t:
                     t = t.split(" - ")
                     t = t[1].split(":")

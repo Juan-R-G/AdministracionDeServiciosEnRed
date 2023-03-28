@@ -9,7 +9,6 @@ class DelDev:
     def __init__(self):
         self.menu = Tk()
         self.menu.title("Eliminar Dispositivo")
-        # self.menu.geometry("750x440")
         self.menu.resizable(False, False)
         self.frm = ttk.Frame(self.menu, padding=10)
         self.frm.grid()
