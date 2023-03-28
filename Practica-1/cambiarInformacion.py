@@ -115,7 +115,7 @@ class ChInfo:
                 elif "Windows" in t:
                     t = t.split(" - ")
                     t = t[1].split(":")
-                    t = t[1].split()
+                    t = t[1].replace(" Version", "").split()
                     file.write("\nSistema Operativo:" + t[0])
                     file.write("_Version:" + t[1])
                 t = consulta15(comm, ip, port)
@@ -135,8 +135,10 @@ class ChInfo:
                 for x in a:
                     i = consulta221(comm, ip, port, str(x))
                     t = consulta222(comm, ip, port, i)
-                    print(t)
-                    file.write("-" + t + ":")
+                    if "0x" in t:
+                        t = t.replace("0x", "").replace("00", "")
+                        t = bytes.fromhex(t).decode('utf-8')
+                    file.write("/" + t + ":")
                     t = consulta227(comm, ip, port, i)
                     file.write(t)
                 file.close()

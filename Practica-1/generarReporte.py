@@ -74,7 +74,7 @@ class Report:
         else:
             image = os.path.join(os.getcwd(), "Images", "linux.jpg")
         table = [["Interfaz", "Estado Administrativo"]]
-        t = content[6].split("-")
+        t = content[6].split("/")
         for v in t:
             if '¡' in v:
                 continue
