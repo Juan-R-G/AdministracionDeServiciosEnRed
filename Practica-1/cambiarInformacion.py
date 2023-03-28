@@ -64,28 +64,28 @@ class ChInfo:
         self.c = len(self.devices) + 1
         self.lbl1 = ttk.Label(self.frm, text="IP/Hostname:")
         self.lbl1.grid(column=0, row=self.c)
-        self.ent1 = ttk.Entry(self.frm, width=30)
+        self.ent1 = ttk.Entry(self.frm, width=25)
         self.ent1.insert(0, x[1])
         self.ent1.grid(column=1, row=self.c)
         x = t[1].split(":")
         self.c += 1
         self.lbl2 = ttk.Label(self.frm, text="Version SNMP:")
         self.lbl2.grid(column=0, row=self.c)
-        self.ent2 = ttk.Entry(self.frm, width=30)
+        self.ent2 = ttk.Entry(self.frm, width=25)
         self.ent2.insert(0, x[1])
         self.ent2.grid(column=1, row=self.c)
         x = t[2].split(":")
         self.c += 1
         self.lbl3 = ttk.Label(self.frm, text="Comunidad:")
         self.lbl3.grid(column=0, row=self.c)
-        self.ent3 = ttk.Entry(self.frm, width=30)
+        self.ent3 = ttk.Entry(self.frm, width=25)
         self.ent3.insert(0, x[1])
         self.ent3.grid(column=1, row=self.c)
         x = t[3].split(":")
         self.c += 1
         self.lbl4 = ttk.Label(self.frm, text="Puerto:")
         self.lbl4.grid(column=0, row=self.c)
-        self.ent4 = ttk.Entry(self.frm, width=30)
+        self.ent4 = ttk.Entry(self.frm, width=25)
         self.ent4.insert(0, x[1])
         self.ent4.grid(column=1, row=self.c)
 
