@@ -60,11 +60,11 @@ class AddDev:
                 if "Linux" in t:
                     t = t.split()
                     file.write("\nSistema Operativo:" + t[0])
-                    file.write("_Version del Kernel:" + t[2])
-                    t = t[3].split("~")
-                    t = t[1].split("-")
-                    file.write("_Distribucion:" + t[1])
-                    file.write("_Version:" + t[0])
+                    file.write("_Version:" + t[2])
+                    # t = t[3].split("~")
+                    # t = t[1].split("-")
+                    # file.write("_Distribucion:" + t[1])
+                    # file.write("_Version:" + t[0])
                 elif "Windows" in t:
                     t = t.split(" - ")
                     t = t[1].split(":")
