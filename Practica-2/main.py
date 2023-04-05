@@ -10,8 +10,8 @@ class Main:
         self.menu.resizable(False, False)
         self.frm = ttk.Frame(self.menu, padding=15)
         self.frm.grid()
-        self.info = "Sistemade Administracion de Contabilidad\nPractica 2 - Modulo de Administracion de Contabilidad\nJuan Roldan Gomez\t\t4CM14\t\t2020630462"
-        self.lbl1 = ttk.Label(self.frm, text=self.info) # width: anchor: center
+        self.info = "Sistema de Administracion de Contabilidad\nPractica 2 - Modulo de Administracion de Contabilidad\nJuan Roldan Gomez\t\t4CM14\t\t2020630462"
+        self.lbl1 = ttk.Label(self.frm, text=self.info, justify=CENTER)  # width: anchor: center
         self.lbl1.grid(column=0, row=0)
         self.lbl2 = ttk.Label(self.frm, text="Escoja una opcion:")
         self.lbl2.grid(column=0, row=1)
