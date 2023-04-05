@@ -48,3 +48,5 @@ class AddDev:
         if ip == "" or ver == "" or comm == "" or port == "":
             self.lbl5 = ttk.Label(self.frm, text="Llene todos los campos!", foreground="red")
             self.lbl5.grid(columnspan=2, row=6)
+        else:
+            self.lbl5.destroy()
