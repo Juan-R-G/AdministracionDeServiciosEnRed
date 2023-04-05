@@ -34,4 +34,17 @@ class AddDev:
         self.ent4 = ttk.Entry(self.frm, width=25)
         self.ent4.insert(0, "161")
         self.ent4.grid(column=1, row=4)
+        self.btn1 = ttk.Button(self.frm, text="Agregar", command=lambda: self.agregar())
+        self.btn1.grid(columnspan=2, row=5)
+        self.lbl5 = ttk.Label()
         self.menu.mainloop()
+
+    def agregar(self):
+        ip = self.ent1.get()
+        ver = self.ent2.get()
+        comm = self.ent3.get()
+        port = self.ent4.get()
+
+        if ip == "" or ver == "" or comm == "" or port == "":
+            self.lbl5 = ttk.Label(self.frm, text="Llene todos los campos!", foreground="red")
+            self.lbl5.grid(columnspan=2, row=6)
