@@ -50,3 +50,15 @@ class AddDev:
             self.lbl5.grid(columnspan=2, row=6)
         else:
             self.lbl5.destroy()
+            if not os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
+                os.mkdir(os.path.join(os.getcwd(), "Dispositivos"))
+            file = open(os.path.join(os.getcwd(), "Dispositivos", ip + ".txt"), "w")
+            file.write("ip:" + ip + "-ver:" + ver + "-comm:" + comm + "-port:" + port)
+            try:
+                t = consulta(comm, ip, port, "1.3.6.1.2.1.1.1.0")  # Sistema Operativo
+                if t == "":
+                    raise Exception("Error al obtener la descripcion del sistema...")
+                if "Linux" in t:
+                    t = t.split()
+            except Exception as e:
+                print(e)
