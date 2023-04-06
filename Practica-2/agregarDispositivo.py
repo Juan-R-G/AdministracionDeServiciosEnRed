@@ -60,5 +60,6 @@ class AddDev:
                     raise Exception("Error al obtener la descripcion del sistema...")
                 if "Linux" in t:
                     t = t.split()
+                    file.write("")
             except Exception as e:
                 print(e)
