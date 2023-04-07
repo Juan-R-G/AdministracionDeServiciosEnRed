@@ -60,6 +60,16 @@ class AddDev:
                     raise Exception("Error al obtener la descripcion del sistema...")
                 if "Linux" in t:
                     t = t.split()
-                    file.write("")
+                    file.write("\nSistema Operativo:" + t[0])
+                    file.write("_Version:" + t[2])
+                elif "Windows" in t:
+                    t = t.split(" - ")
+                    t = t[1].split(":")
+                    t = t[1].replace(" Version", "").split()
+                    file.write("\nSistema Operativo:" + t[0])
+                    file.write("_Version:" + t[1])
+                else:
+                    t = t.split()
+                    file.write("\nSistema Operativo(?):" + t[0])
             except Exception as e:
                 print(e)
