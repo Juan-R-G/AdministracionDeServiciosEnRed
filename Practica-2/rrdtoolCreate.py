@@ -11,7 +11,8 @@ if os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
         for name in devices:
             if not os.path.exists(os.path.join(os.getcwd(), "Databases", name + ".rrd")):
                 try:
-                    rrdtool.create(name + ".rrd", "--start", "N", "--step", "60",
+                    rrdtool.create(os.path.join(os.getcwd(), "Databases", name + ".rrd"),
+                                   "--start", "N", "--step", "60",
                                    "DS:ifInUcastPkts:COUNTER:120:U:U",
                                    "DS:ipInReceives:COUNTER:120:U:U",
                                    "DS:icmpOutEchos:COUNTER:120:U:U",
@@ -20,6 +21,8 @@ if os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
                                    "RRA:AVERAGE:0.5:1:60",
                                    "RRA:AVERAGE:0.5:5:24",
                                    "RRA:AVERAGE:0.5:10:18")
+                    rrdtool.dump(os.path.join(os.getcwd(), "Databases", name+".rrd"), os.path.join(os.getcwd(), "Databases", name+".xml"))
+                    print("Se crearon exitosamente los archivos: " + name + ".rrd y " + name + ".xml")
                 except Exception as e:
                     print("Ocurrio un error al crear el archivo " + name + ".rrd")
                     print("E: " + e)
