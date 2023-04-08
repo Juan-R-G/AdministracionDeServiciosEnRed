@@ -144,7 +144,7 @@ class ChInfo:
                     raise Exception("Error al obtener el numero de interfaces de red...")
                 file.write("\nInterfaces:" + t)
 
-                first = ""  # Primer Interfaz de Red 'Up'
+                first = ''  # Primer Interfaz de Red 'Up'
                 file.write("\n¡")
                 n = int(t)
                 if n < 6:
@@ -166,8 +166,8 @@ class ChInfo:
                         raise Exception("Error al obtener el estado administrativo de una interfaz de red...")
                     file.write(t)
 
-                    if int(t) == 1 and first == "":
-                        first = "1.3.6.1.2.1.2.2.1.7." + str(x)
+                    if int(t) == 1 and first == '':
+                        first = str(x)
 
                 file.write("\n&" + first)
                 file.close()

@@ -120,7 +120,7 @@ class AddDev:
                     file.write(t)
 
                     if int(t) == 1 and first == "":
-                        first = "1.3.6.1.2.1.2.2.1.7." + str(x)
+                        first = str(x)
 
                 file.write("\n&" + first)
                 file.close()
