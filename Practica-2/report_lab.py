@@ -56,13 +56,7 @@ def reporte2(path, info, modules):
             flowables.append(Image(image))
             flowables.append(space)
         mydoc.build(flowables)
+        return "Se ha creado el reporte en formato PDF y se ha guardado en la carpeta 'Reportes'!"
     except Exception as e:
         print(e)
         return "Error al generar el reporte: " + e.args[0]
-
-
-def prueba():
-    styles = getSampleStyleSheet()
-    print(styles)
-
-prueba()
