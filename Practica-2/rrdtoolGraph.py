@@ -11,4 +11,4 @@ def grafica(filename, time_start, time_end, title, var, db, name):
         return "OK"
     except Exception as e:
         print(e)
-        return "error"
+        return "Error al generar la grafica :" + e.args[0]
