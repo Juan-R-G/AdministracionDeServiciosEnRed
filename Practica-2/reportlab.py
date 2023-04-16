@@ -1,3 +1,4 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from reportlab
+from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
