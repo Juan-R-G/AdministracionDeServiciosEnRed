@@ -1,7 +1,8 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 def reporte1(path, title, info, image, table):
@@ -40,11 +41,14 @@ def reporte1(path, title, info, image, table):
         return "Error al generar el reporte: " + e.args[0]
 
 
-def reporte2(path):
+def reporte2(path, info, modules):
     try:
         mydoc = SimpleDocTemplate(path, pagesize=letter)
-
-        mydoc.build()
+        styles = getSampleStyleSheet()
+        flowables = []
+        for i in info:
+            para = Paragraph(i, style=styles["Normal"])
+        mydoc.build(flowables)
     except Exception as e:
         print(e)
         return "Error al generar el reporte: " + e.args[0]
