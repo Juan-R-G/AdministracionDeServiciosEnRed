@@ -1,5 +1,4 @@
 import rrdtool
-import time
 
 
 def grafica(filename, time_start, time_end, title, var, db, name):
