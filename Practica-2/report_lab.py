@@ -46,7 +46,7 @@ def reporte2(path, title, info, modules):
     try:
         mydoc = SimpleDocTemplate(path, pagesize=letter)
         styles = getSampleStyleSheet()
-        space = Spacer(1, 0.25*inch)
+        space = Spacer(1, 0.2*inch)
         flowables = []
         for t in title:
             flowables.append(Paragraph(t, style=styles["Heading1"]))
@@ -56,6 +56,7 @@ def reporte2(path, title, info, modules):
             flowables.append(space)
         for info, image in modules:
             flowables.append(Paragraph(info, style=styles["Heading2"]))
+            flowables.append(space)
             flowables.append(Image(image))
             flowables.append(space)
         mydoc.build(flowables)

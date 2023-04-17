@@ -262,10 +262,10 @@ class Report:
                     modules = []
                     variables = ["ifInUcastPkts", "ipInReceives", "icmpOutEchos", "tcpInSegs", "udpInDatagrams"]
                     titulos = {
-                        "ifInUcastPkts": "Paquetes Unicast que ha recibido una interfaz de red del agente",
-                        "ipInReceives": "Paquetes recibidos a protocolos IP, incluyendo los que tienen errores",
+                        "ifInUcastPkts": "Paquetes Unicast que ha recibido una interfaz de red",
+                        "ipInReceives": "Paquetes recibidos a protocolos IP, incluyendo los errores",
                         "icmpOutEchos": "Mensajes ICMP echo que ha enviado el agente",
-                        "tcpInSegs": "Segmentos TCP recibidos, incluyendo los que se han recibido con errores",
+                        "tcpInSegs": "Segmentos TCP recibidos, incluyendo los recibidos con errores",
                         "udpInDatagrams": "Datagramas entregados a usuarios UDP"
                     }
                     nombres = {
