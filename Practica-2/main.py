@@ -12,12 +12,12 @@ class Main:
         self.menu = Tk()
         self.menu.title("Inicio")
         self.menu.resizable(False, False)
-        self.frm = ttk.Frame(self.menu, padding=15)
+        self.frm = ttk.Frame(self.menu, padding=10)
         self.frm.grid()
-        self.info = "Sistema de Administracion de Contabilidad\nPractica 2 - Modulo de Administracion de Contabilidad\nJuan Roldan Gomez\t\t4CM14\t\t2020630462"
-        self.lbl1 = ttk.Label(self.frm, text=self.info, justify=CENTER)  # width: anchor:CENTER padding:
+        self.info = "Sistema de Administracion de Contabilidad\n\nPractica 2 - Modulo de Administracion de Contabilidad\n\nJuan Roldan Gomez\t\t4CM14\t\t2020630462"
+        self.lbl1 = ttk.Label(self.frm, text=self.info, justify=CENTER, padding=5)  # width: anchor:CENTER
         self.lbl1.grid(column=0, row=0)
-        self.lbl2 = ttk.Label(self.frm, text="Escoja una opcion:")
+        self.lbl2 = ttk.Label(self.frm, text="Escoja una opcion:", padding=10)
         self.lbl2.grid(column=0, row=1)
         self.eleccion = IntVar()
         self.opc1 = ttk.Radiobutton(self.frm, text="Agregar Dispositivo", value=1, variable=self.eleccion, command=lambda: self.btn1.state(["!disabled"]))
