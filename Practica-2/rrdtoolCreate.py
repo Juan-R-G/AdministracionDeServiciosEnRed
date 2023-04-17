@@ -25,4 +25,4 @@ if os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
                     print("Se crearon exitosamente los archivos: " + name + ".rrd y " + name + ".xml")
                 except Exception as e:
                     print("Ocurrio un error al crear el archivo " + name + ".rrd")
-                    print("E: " + e)
+                    print("Error: " + e.args[0])

@@ -62,4 +62,4 @@ def reporte2(path, title, info, modules):
         return "Se ha creado el reporte en formato PDF y se ha guardado en la carpeta 'Reportes'!"
     except Exception as e:
         print(e)
-        return "Error al generar el reporte: " + e.args[0]
+        return "Error al generar el reporte de contabilidad: " + e.args[0]
