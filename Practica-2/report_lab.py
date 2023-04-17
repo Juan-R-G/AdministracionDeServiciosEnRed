@@ -42,17 +42,20 @@ def reporte1(path, title, info, image, table):
         return "Error al generar el reporte general: " + e.args[0]
 
 
-def reporte2(path, info, modules):
+def reporte2(path, title, info, modules):
     try:
         mydoc = SimpleDocTemplate(path, pagesize=letter)
         styles = getSampleStyleSheet()
         space = Spacer(1, 0.25*inch)
         flowables = []
+        for t in title:
+            flowables.append(Paragraph(t, style=styles["Heading1"]))
+            flowables.append(space)
         for i in info:
             flowables.append(Paragraph(i, style=styles["Normal"]))
             flowables.append(space)
         for info, image in modules:
-            flowables.append(Paragraph(info, style=styles["Normal"]))
+            flowables.append(Paragraph(info, style=styles["Heading2"]))
             flowables.append(Image(image))
             flowables.append(space)
         mydoc.build(flowables)
