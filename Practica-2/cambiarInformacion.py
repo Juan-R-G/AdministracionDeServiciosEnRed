@@ -59,7 +59,7 @@ class ChInfo:
         file.close()
         t = t.split('-')
         x = t[0].split(':')
-        self.row += 1
+        self.row = len(self.devices) + 1
         self.lbl1 = ttk.Label(self.frm, text="IP/Hostname:")
         self.lbl1.grid(column=0, row=self.row)
         self.ent1 = ttk.Entry(self.frm, width=25)

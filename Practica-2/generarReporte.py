@@ -23,6 +23,8 @@ class Report:
                 self.flag = True
         if self.flag:
             self.lbl1 = ttk.Label(self.frm, text="Seleccione un Dispositivo:")
+        else:
+            self.lbl1 = ttk.Label(self.frm, text="No hay dispositivos guardados...")
         self.lbl1.grid(columnspan=3, row=0)
         self.eleccion = StringVar()
         self.radioButtons = []
@@ -32,16 +34,33 @@ class Report:
                 self.radioButtons.append(ttk.Radiobutton(self.frm, text=name, value=name, variable=self.eleccion, command=lambda: self.dispositivo()))
                 self.c += 1
                 self.radioButtons[self.c-1].grid(columnspan=3, row=self.c)
-        # Seleccionar Reporte
+        self.lbl2 = ttk.Label()
+        self.tipoReporte = IntVar()
+        self.radioButtons1 = []
+        self.radioButtons1.append(ttk.Radiobutton(self.frm, text="Reporte General", value=1, variable=self.tipoReporte, command=lambda: self.tipo1()))
+        self.radioButtons1.append(ttk.Radiobutton(self.frm, text="Reporte de Contabilidad", value=2, variable=self.tipoReporte, command=lambda: self.tipo2()))
         self.btn1 = ttk.Button()
         if self.flag:
             self.btn1 = ttk.Button(self.frm, text="Generar", command=lambda: self.generar(), state=DISABLED)
+            self.btn1.grid(columnspan=3, row=self.c+10)
         else:
             self.btn1 = ttk.Button(self.frm, text="Continuar", command=lambda: self.menu.destroy())
-        self.btn1.grid(columnspan=3, row=self.c+1)
+            self.btn1.grid(columnspan=3, row=1)
         self.menu.mainloop()
 
     def dispositivo(self):
+        self.lbl2 = ttk.Label(self.frm, text="Seleccione el reporte a generar:")
+        self.c = len(self.devices) + 1
+        self.lbl2.grid(columnspan=3, row=self.c)
+        self.c += 1
+        self.radioButtons1[0].grid(columnspan=3, row=self.c)
+        self.c += 1
+        self.radioButtons1[1].grid(columnspan=3, row=self.c)
+
+    def tipo1(self):
+        pass
+
+    def tipo2(self):
         pass
 
     def generar(self):
