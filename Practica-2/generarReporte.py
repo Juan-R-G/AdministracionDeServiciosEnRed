@@ -116,21 +116,21 @@ class Report:
     def tipo2(self):
         self.row = len(self.devices) + 4
         self.lbl3 = ttk.Label(self.frm, text="Fecha Inicio")
-        self.lbl3.grid(columnspan=3, row=self.row)
+        self.lbl3.grid(column=0, columnspan=3, row=self.row)
         self.lbl4 = ttk.Label(self.frm, text="Fecha Termino")
-        self.lbl4.grid(columnspan=3, row=self.row)
+        self.lbl4.grid(column=3, columnspan=3, row=self.row)
         self.row += 1
-        self.lbl5 = ttk.Label(self.frm, text="Dia")
+        self.lbl5 = ttk.Label(self.frm, text="Dia:")
         self.lbl5.grid(column=0, row=self.row)
-        self.lbl6 = ttk.Label(self.frm, text="Mes")
+        self.lbl6 = ttk.Label(self.frm, text="Mes:")
         self.lbl6.grid(column=1, row=self.row)
-        self.lbl7 = ttk.Label(self.frm, text="Año")
+        self.lbl7 = ttk.Label(self.frm, text="Año:")
         self.lbl7.grid(column=2, row=self.row)
-        self.lbl8 = ttk.Label(self.frm, text="Dia")
+        self.lbl8 = ttk.Label(self.frm, text="Dia:")
         self.lbl8.grid(column=3, row=self.row)
-        self.lbl9 = ttk.Label(self.frm, text="Mes")
+        self.lbl9 = ttk.Label(self.frm, text="Mes:")
         self.lbl9.grid(column=4, row=self.row)
-        self.lbl10 = ttk.Label(self.frm, text="Año")
+        self.lbl10 = ttk.Label(self.frm, text="Año:")
         self.lbl10.grid(column=5, row=self.row)
         self.row += 1
         t = datetime.now()
@@ -153,18 +153,48 @@ class Report:
         self.spin6.insert(0, str(t.year))
         self.spin6.grid(column=5, row=self.row)
         self.row += 1
-        self.lbl11 = ttk.Label(self.frm, text="Hora")
-        self.lbl12 = ttk.Label()
-        self.lbl13 = ttk.Label()
-        self.lbl14 = ttk.Label()
-        self.lbl15 = ttk.Label()
-        self.lbl16 = ttk.Label()
-        self.spin7 = ttk.Spinbox()
-        self.spin8 = ttk.Spinbox()
-        self.spin9 = ttk.Spinbox()
-        self.spin10 = ttk.Spinbox()
-        self.spin11 = ttk.Spinbox()
-        self.spin12 = ttk.Spinbox()
+        self.lbl11 = ttk.Label(self.frm, text="Hora:")
+        self.lbl11.grid(column=0, row=self.row)
+        self.lbl12 = ttk.Label(self.frm, text="Minutos:")
+        self.lbl12.grid(column=1, row=self.row)
+        self.lbl13 = ttk.Label(self.frm, text="Segundos:")
+        self.lbl13.grid(column=2, row=self.row)
+        self.lbl14 = ttk.Label(self.frm, text="Hora:")
+        self.lbl14.grid(column=3, row=self.row)
+        self.lbl15 = ttk.Label(self.frm, text="Minutos:")
+        self.lbl15.grid(column=4, row=self.row)
+        self.lbl16 = ttk.Label(self.frm, text="Segundos:")
+        self.lbl16.grid(column=5, row=self.row)
+        self.row += 1
+        self.spin7 = ttk.Spinbox(self.frm, from_=0, to=23, width=5)
+        self.spin7.insert(0, "0")
+        self.spin7.grid(column=0, row=self.row)
+        self.spin8 = ttk.Spinbox(self.frm, from_=0, to=59, width=5)
+        self.spin8.insert(0, "0")
+        self.spin8.grid(column=1, row=self.row)
+        self.spin9 = ttk.Spinbox(self.frm, from_=0, to=59, width=5)
+        self.spin9.insert(0, "0")
+        self.spin9.grid(column=2, row=self.row)
+        self.spin10 = ttk.Spinbox(self.frm, from_=0, to=23, width=5)
+        self.spin10.insert(0, str(t.hour))
+        self.spin10.grid(column=3, row=self.row)
+        self.spin11 = ttk.Spinbox(self.frm, from_=0, to=59, width=5)
+        self.spin11.insert(0, str(t.minute))
+        self.spin11.grid(column=4, row=self.row)
+        self.spin12 = ttk.Spinbox(self.frm, from_=0, to=59, width=5)
+        self.spin12.insert(0, str(t.second))
+        self.spin12.grid(column=5, row=self.row)
+        self.btn1.state(["!disabled"])
 
     def generar(self):
-        pass
+        try:
+            if self.tipoReporte == 1:
+                pass
+            elif self.tipoReporte == 2:
+                pass
+            else:
+                raise Exception("Error al seleccionar un reporte...")
+        except Exception as e:
+            print(e)
+            self.menu.destroy()
+
