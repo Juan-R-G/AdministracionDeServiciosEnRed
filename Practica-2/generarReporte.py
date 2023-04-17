@@ -23,5 +23,26 @@ class Report:
                 self.flag = True
         if self.flag:
             self.lbl1 = ttk.Label(self.frm, text="Seleccione un Dispositivo:")
-        self.lbl1.grid(column=0, row=0)
+        self.lbl1.grid(columnspan=3, row=0)
+        self.eleccion = StringVar()
+        self.radioButtons = []
+        self.c = 0
+        if self.flag:
+            for name in self.devices:
+                self.radioButtons.append(ttk.Radiobutton(self.frm, text=name, value=name, variable=self.eleccion, command=lambda: self.dispositivo()))
+                self.c += 1
+                self.radioButtons[self.c-1].grid(columnspan=3, row=self.c)
+        # Seleccionar Reporte
+        self.btn1 = ttk.Button()
+        if self.flag:
+            self.btn1 = ttk.Button(self.frm, text="Generar", command=lambda: self.generar(), state=DISABLED)
+        else:
+            self.btn1 = ttk.Button(self.frm, text="Continuar", command=lambda: self.menu.destroy())
+        self.btn1.grid(columnspan=3, row=self.c+1)
         self.menu.mainloop()
+
+    def dispositivo(self):
+        pass
+
+    def generar(self):
+        pass
