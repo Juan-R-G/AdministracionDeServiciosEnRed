@@ -6,12 +6,12 @@ def consulta(community, ip, port, oid):
 
     if error_indication:
         print(error_indication)
-        return ""
+        return "error"
     elif error_status:
         print(error_status)
-        return ""
+        return "error"
     else:
-        res = ""
+        res = "error"
         for var_bind in var_binds:
             r = [var.prettyPrint() for var in var_bind]
             res = r[1]

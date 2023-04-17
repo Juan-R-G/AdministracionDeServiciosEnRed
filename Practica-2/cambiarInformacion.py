@@ -103,7 +103,7 @@ class ChInfo:
             file.write("ip:" + ip + "-ver:" + ver + "-comm:" + comm + "-port:" + port)
             try:
                 t = consulta(comm, ip, port, "1.3.6.1.2.1.1.1.0")  # Sistema Operativo
-                if t == "":
+                if t == "error":
                     file.close()
                     raise Exception("Error al obtener la descripcion del sistema...")
                 if "Linux" in t:
@@ -121,25 +121,25 @@ class ChInfo:
                     file.write("\nSistema Operativo(?):" + t[0])
 
                 t = consulta(comm, ip, port, "1.3.6.1.2.1.1.5.0")  # Nombre del Agente
-                if t == "":
+                if t == "error":
                     file.close()
                     raise Exception("Error al obtener el nombre del agente...")
                 file.write("\nDispositivo:" + t)
 
                 t = consulta(comm, ip, port, "1.3.6.1.2.1.1.4.0")  # Contacto del Agente
-                if t == "":
+                if t == "error":
                     file.close()
                     raise Exception("Error al obtener el contacto del agente...")
                 file.write("\nContacto:" + t)
 
                 t = consulta(comm, ip, port, "1.3.6.1.2.1.1.6.0")  # Ubicación del Agente
-                if t == "":
+                if t == "error":
                     file.close()
                     raise Exception("Error al obtener la localización del agente...")
                 file.write("\nUbicacion:" + t)
 
                 t = consulta(comm, ip, port, "1.3.6.1.2.1.2.1.0")  # Numero de interfaces de red
-                if t == "":
+                if t == "error":
                     file.close()
                     raise Exception("Error al obtener el numero de interfaces de red...")
                 file.write("\nInterfaces:" + t)
@@ -153,7 +153,7 @@ class ChInfo:
                     n = range(1, 6)
                 for x in n:
                     t = consulta(comm, ip, port, "1.3.6.1.2.1.2.2.1.2." + str(x))  # Nombre de una interfaz de red
-                    if t == "":
+                    if t == "error":
                         file.close()
                         raise Exception("Error al obtener la descripcion de una interfaz de red...")
                     if "0x" in t:
@@ -161,7 +161,7 @@ class ChInfo:
                         t = bytes.fromhex(t).decode('utf-8')
                     file.write("/" + t + ":")
                     t = consulta(comm, ip, port, "1.3.6.1.2.1.2.2.1.7." + str(x))  # Estado Administrativo de una interdaz de red
-                    if t == "":
+                    if t == "error":
                         file.close()
                         raise Exception("Error al obtener el estado administrativo de una interfaz de red...")
                     file.write(t)
@@ -178,5 +178,5 @@ class ChInfo:
                 file.write("\n" + e.args[0])
                 file.close()
                 self.menu.destroy()
-                messagebox.showerror("Cambiar Informacion", "Ocurrio un error al obtener y actualizar los datos...")
+                messagebox.showerror("Cambiar Informacion", "Error: " + e.args[0])
 
