@@ -192,7 +192,7 @@ class Report:
                 file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
                 content = [f.replace("\n", "") for f in file]
                 file.close()
-                title = ["Administracion de Servicios en Red", "Practica 1", "Juan Roldan Gomez   4CM14"]
+                title = ["Administracion de Servicios en Red", "Practica 1", "Juan Roldan Gomez    4CM14"]
                 info = []
                 t = content[0].split('-')
                 x = t[0].split(':')
@@ -241,7 +241,7 @@ class Report:
                 file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
                 content = [f.replace("\n", "") for f in file]
                 file.close()
-                title = ["Administracion de Servicios en Red", "Practica 2", "Juan Roldan Gomez   4CM14"]
+                title = ["Administracion de Servicios en Red", "Practica 2", "Juan Roldan Gomez    4CM14"]
                 info = []
                 t = content[0].split('-')
                 x = t[0].split(':')
@@ -250,10 +250,14 @@ class Report:
                 info.append("Comunidad: " + x[1])
                 t = content[2].split(':')
                 info.append("Dispositivo: " + t[1])
-                tiempoIni = self.spin1.get() + "/" + self.spin2.get() + "/" + self.spin3.get() + ", " + self.spin7.get() + ":" + self.spin8.get() + ":" + self.spin9.get()
-                tiempoFin = self.spin4.get() + "/" + self.spin5.get() + "/" + self.spin6.get() + ", " + self.spin10.get() + ":" + self.spin11.get() + ":" + self.spin12.get()
-                print("Inicio: " + tiempoIni)
-                print("Fin: " + tiempoFin)
+                inicio = self.spin1.get() + "/" + self.spin2.get() + "/" + self.spin3.get() + ", " + self.spin7.get() + ":" + self.spin8.get() + ":" + self.spin9.get()
+                fin = self.spin4.get() + "/" + self.spin5.get() + "/" + self.spin6.get() + ", " + self.spin10.get() + ":" + self.spin11.get() + ":" + self.spin12.get()
+                info.append("Fecha Inicio: " + inicio)
+                info.append("Fecha Termino: " + fin)
+                t1 = datetime.strptime(inicio, "%d/%m/%Y, %H:%M:%S")
+                t2 = datetime.strptime(fin, "%d/%m/%Y, %H:%M:%S")
+                start = int(datetime.timestamp(t1))
+                end = int(datetime.timestamp(t2))
             else:
                 raise Exception("Error al seleccionar un reporte...")
         except Exception as e:
