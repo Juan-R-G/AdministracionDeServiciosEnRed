@@ -49,4 +49,4 @@ class DelDev:
         except Exception as e:
             print(e)
             self.menu.destroy()
-            messagebox.showerror("Eliminar Dispositivo", "Ocurrio un error al intentar eliminar el dispositivo")
+            messagebox.showerror("Eliminar Dispositivo", "Error al intentar eliminar el dispositivo: " + e.args[0])
