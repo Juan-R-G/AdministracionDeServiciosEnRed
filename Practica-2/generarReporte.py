@@ -4,6 +4,7 @@ from tkinter import messagebox
 import os
 from datetime import datetime
 from report_lab import *
+from rrdtoolGraph import grafica
 
 
 class Report:
@@ -234,9 +235,8 @@ class Report:
                 msg = reporte1(fname, title, info, image, table)
                 if "Error" in msg:
                     raise Exception(msg)
-                else:
-                    self.menu.destroy()
-                    messagebox.showinfo("Generar Reporte", msg)
+                self.menu.destroy()
+                messagebox.showinfo("Generar Reporte", msg)
             elif self.tipoReporte.get() == 2:
                 file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
                 content = [f.replace("\n", "") for f in file]
@@ -258,6 +258,39 @@ class Report:
                 t2 = datetime.strptime(fin, "%d/%m/%Y, %H:%M:%S")
                 start = int(datetime.timestamp(t1))
                 end = int(datetime.timestamp(t2))
+                if os.path.exists(os.path.join(os.getcwd(), "Databases", self.eleccion.get() + ".rrd")):
+                    modules = []
+                    variables = ["ifInUcastPkts", "ipInReceives", "icmpOutEchos", "tcpInSegs", "udpInDatagrams"]
+                    titulos = {
+                        "ifInUcastPkts": "Paquetes Unicast que ha recibido una interfaz de red del agente",
+                        "ipInReceives": "Paquetes recibidos a protocolos IP, incluyendo los que tienen errores",
+                        "icmpOutEchos": "Mensajes ICMP echo que ha enviado el agente",
+                        "tcpInSegs": "Segmentos TCP recibidos, incluyendo los que se han recibido con errores",
+                        "udpInDatagrams": "Datagramas entregados a usuarios UDP"
+                    }
+                    nombres = {
+                        "ifInUcastPkts": "Paquetes recibidos",
+                        "ipInReceives": "Paquetes recibidos",
+                        "icmpOutEchos": "Mensajes enviados",
+                        "tcpInSegs": "Segmentos recibidos",
+                        "udpInDatagrams": "Datagramas entregados"
+                    }
+                    for var in variables:
+                        t = os.path.join(os.getcwd(), "Images", self.eleccion.get() + "(" + var + ").png")
+                        x = grafica(t, start, end, titulos[var], var, os.path.join(os.getcwd(), "Databases", self.eleccion.get()+".rrd"), nombres[var])
+                        if "Error" in x:
+                            raise Exception(x)
+                        modules.append([titulos[var], t])
+                    if not os.path.exists(os.path.join(os.getcwd(), "Reportes")):
+                        os.mkdir(os.path.join(os.getcwd(), "Reportes"))
+                    fname = os.path.join(os.getcwd(), "Reportes", self.eleccion.get() + "(Reporte de Contabilidad).pdf")
+                    msg = reporte2(fname, title, info, modules)
+                    if "Error" in msg:
+                        raise Exception(msg)
+                    self.menu.destroy()
+                    messagebox.showinfo("Generar Reporte", msg)
+                else:
+                    raise Exception("No existe una base de datos para el dispositivo seleccionado")
             else:
                 raise Exception("Error al seleccionar un reporte...")
         except Exception as e:
