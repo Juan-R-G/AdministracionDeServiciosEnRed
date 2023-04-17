@@ -188,13 +188,60 @@ class Report:
 
     def generar(self):
         try:
-            if self.tipoReporte == 1:
-                pass
-            elif self.tipoReporte == 2:
+            if self.tipoReporte.get() == 1:
+                file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
+                content = [f.replace("\n", "") for f in file]
+                file.close()
+                title = ["Administracion de Servicios en Red", "Practica 1", "Juan Roldan Gomez  4CM14"]
+                info = []
+                t = content[0].split('-')
+                x = t[0].split(':')
+                info.append("IP: " + x[1])
+                x = t[2].split(':')
+                info.append("Comunidad: " + x[1])
+                t = content[1].split('_')
+                for v in t:
+                    x = v.split(':')
+                    info.append(x[0] + ": " + x[1])
+                t = content[2].split(':')
+                info.append(t[0] + ": " + t[1])
+                t = content[3].split(':')
+                info.append(t[0] + ": " + t[1])
+                t = content[4].split(':')
+                info.append(t[0] + ": " + t[1])
+                t = content[5].split(':')
+                info.append(t[0] + "(" + t[1] + "):")
+                image = ""
+                if "Windows" in content[1]:
+                    image = os.path.join(os.getcwd(), "Images", "windows.png")
+                else:
+                    image = os.path.join(os.getcwd(), "Images", "linux.jpg")
+                table = [["Interfaz", "Estado Administrativo"]]
+                t = content[6].split('/')
+                for v in t:
+                    if '¡' in v:
+                        continue
+                    x = v.split(':')
+                    if int(x[1]) == 1:
+                        table.append([x[0], "Up"])
+                    elif int(x[1]) == 2:
+                        table.append([x[0], "Down"])
+                    else:
+                        table.append([x[0], "Testing"])
+                if not os.path.exists(os.path.join(os.getcwd(), "Reportes")):
+                    os.mkdir(os.path.join(os.getcwd(), "Reportes"))
+                fname = os.path.join(os.getcwd(), "Reportes", self.eleccion.get() + "(Reporte General).pdf")
+                msg = reporte1(fname, title, info, image, table)
+                if "Error" in msg:
+                    raise Exception(msg)
+                else:
+                    self.menu.destroy()
+                    messagebox.showinfo("Generar Reporte", msg)
+            elif self.tipoReporte.get() == 2:
                 pass
             else:
                 raise Exception("Error al seleccionar un reporte...")
         except Exception as e:
             print(e)
             self.menu.destroy()
-
+            messagebox.showerror("Generar Reporte", "Error: " + e.args[0])

@@ -24,14 +24,14 @@ def reporte1(path, title, info, image, table):
         y -= 100
         t = Table(table)
         t.setStyle(TableStyle([
-            ('ALIGN', (0,0), (-1, -1), 'CENTRE'),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTRE'),
             ('FONT', (0, 0), (-1, -1), 'Helvetica'),
             ('FONTSIZE', (0, 0), (-1, -1), 14),
             ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
             ('TEXTCOLOR', (1, 1), (-1, -1), colors.mediumblue),
-            ('LINEBELOW', (0, 0), (-1, 0), colors.black),
-            ('LINEAFTER', (0, 0), (0, -1), colors.black),
-            ('LINEBELOW', (0, 1), (-1, -2), colors.black)
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.black),
+            ('LINEAFTER', (0, 0), (0, -1), 2, colors.black),
+            ('LINEBELOW', (0, 1), (-1, -2), 1, colors.black)
         ]))
         t.wrapOn(mycanvas, 150, 100)
         t.drawOn(mycanvas, x, y)
@@ -39,7 +39,7 @@ def reporte1(path, title, info, image, table):
         return "Se ha creado el reporte en formato PDF y se ha guardado en la carpeta 'Reportes'!"
     except Exception as e:
         print(e)
-        return "Error al generar el reporte: " + e.args[0]
+        return "Error al generar el reporte general: " + e.args[0]
 
 
 def reporte2(path, info, modules):
