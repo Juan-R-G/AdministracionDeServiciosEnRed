@@ -50,7 +50,6 @@ def reporte2(path, title, info, modules):
         flowables = []
         for t in title:
             flowables.append(Paragraph(t, style=styles["Heading1"]))
-            flowables.append(space)
         for i in info:
             flowables.append(Paragraph(i, style=styles["Normal"]))
             flowables.append(space)
