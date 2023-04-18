@@ -15,7 +15,7 @@ class Main:
         self.frm = ttk.Frame(self.menu, padding=10)
         self.frm.grid()
         self.info = "Sistema de Administracion de Contabilidad\n\nPractica 2 - Modulo de Administracion de Contabilidad\n\nJuan Roldan Gomez\t\t4CM14\t\t2020630462"
-        self.lbl1 = ttk.Label(self.frm, text=self.info, justify=CENTER, padding=5)  # width: anchor:CENTER
+        self.lbl1 = ttk.Label(self.frm, text=self.info, justify=CENTER, padding=6)  # width: anchor:CENTER
         self.lbl1.grid(column=0, row=0)
         self.lbl2 = ttk.Label(self.frm, text="Escoja una opcion:", padding=10)
         self.lbl2.grid(column=0, row=1)
