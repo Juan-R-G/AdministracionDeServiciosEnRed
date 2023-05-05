@@ -19,7 +19,7 @@ class ChInfo:
             for root, dirs, files in os.walk(os.path.join(os.getcwd(), "Dispositivos")):
                 for name in files:
                     self.devices.append(name.replace(".txt", ""))
-            if len(self.devices) > 0:
+            if len(self.devices):
                 self.flag = True
         if self.flag:
             self.lbl0 = ttk.Label(self.frm, text="Seleccione un Dispositivo:")
@@ -165,10 +165,10 @@ class ChInfo:
                 file.write("\n&" + first)
                 file.close()
                 self.menu.destroy()
-                messagebox.showinfo("Agregar Dispositivo", "Se ha agregado el dispositivo correctamente!")
+                messagebox.showinfo("Cambiar Informacion", "Se han actualizado correctamente los datos del dispositivo!")
             except Exception as e:
                 print(e)
                 file.write("\n" + e.args[0])
                 file.close()
                 self.menu.destroy()
-                messagebox.showerror("Agregar Dispositivo", "Error: " + e.args[0])
+                messagebox.showerror("Cambiar Informacion", "Error: " + e.args[0])
