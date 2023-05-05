@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from agregarDispositivo import AddDev
 
 
 class Main:
@@ -30,16 +31,17 @@ class Main:
     def seleccion(self):
         if self.eleccion.get() == 1:
             self.menu.destroy()
-            Menu()
+            AddDev()
+            Main()
         elif self.eleccion.get() == 2:
             self.menu.destroy()
-            Menu()
+            Main()
         elif self.eleccion.get() == 3:
             self.menu.destroy()
-            Menu()
+            Main()
         elif self.eleccion.get() == 4:
             self.menu.destroy()
-            Menu()
+            Main()
 
 
 Main()
