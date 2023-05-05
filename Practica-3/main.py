@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from agregarDispositivo import AddDev
+from cambiarInformacion import ChInfo
 
 
 class Main:
@@ -35,6 +36,7 @@ class Main:
             Main()
         elif self.eleccion.get() == 2:
             self.menu.destroy()
+            ChInfo()
             Main()
         elif self.eleccion.get() == 3:
             self.menu.destroy()

@@ -5,7 +5,7 @@ import os
 from snmp import consulta
 
 
-class AddDev:
+class ChInfo:
     def __init__(self):
         self.menu = Tk()
         self.menu.title("Cambiar Informacion")
@@ -63,23 +63,29 @@ class AddDev:
         self.lbl1 = ttk.Label(self.frm, text="IP/Hostname:")
         self.lbl1.grid(column=0, row=self.row)
         self.ent1 = ttk.Entry(self.frm, width=25)
-        self.ent1.insert(0, "localhost")
-        self.ent1.grid(column=1, row=1)
+        self.ent1.insert(0, x[1])
+        self.ent1.grid(column=1, row=self.row)
+        x = t[1].split(':')
+        self.row += 1
         self.lbl2 = ttk.Label(self.frm, text="Version SNMP:")
-        self.lbl2.grid(column=0, row=2)
+        self.lbl2.grid(column=0, row=self.row)
         self.ent2 = ttk.Entry(self.frm, width=25)
-        self.ent2.insert(0, "1")
-        self.ent2.grid(column=1, row=2)
+        self.ent2.insert(0, x[1])
+        self.ent2.grid(column=1, row=self.row)
+        x = t[2].split(':')
+        self.row += 1
         self.lbl3 = ttk.Label(self.frm, text="Comunidad:")
-        self.lbl3.grid(column=0, row=3)
+        self.lbl3.grid(column=0, row=self.row)
         self.ent3 = ttk.Entry(self.frm, width=25)
-        self.ent3.insert(0, "JuanRGomez")
-        self.ent3.grid(column=1, row=3)
+        self.ent3.insert(0, x[1])
+        self.ent3.grid(column=1, row=self.row)
+        x = t[3].split(':')
+        self.row += 1
         self.lbl4 = ttk.Label(self.frm, text="Puerto:")
-        self.lbl4.grid(column=0, row=4)
+        self.lbl4.grid(column=0, row=self.row)
         self.ent4 = ttk.Entry(self.frm, width=25)
-        self.ent4.insert(0, "161")
-        self.ent4.grid(column=1, row=4)
+        self.ent4.insert(0, x[1])
+        self.ent4.grid(column=1, row=self.row)
 
     def actualizar(self):
         ip = self.ent1.get()
@@ -89,11 +95,10 @@ class AddDev:
 
         if ip == "" or ver == "" or comm == "" or port == "":
             self.lbl5 = ttk.Label(self.frm, text="Llene todos los campos!", foreground="red")
-            self.lbl5.grid(columnspan=2, row=6)
+            self.lbl5.grid(columnspan=2, row=self.row+2)
         else:
             self.lbl5.destroy()
-            if not os.path.exists(os.path.join(os.getcwd(), "Dispositivos")):
-                os.mkdir(os.path.join(os.getcwd(), "Dispositivos"))
+            os.remove(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"))
             file = open(os.path.join(os.getcwd(), "Dispositivos", ip + ".txt"), "w")
             file.write("ip:" + ip + "-ver:" + ver + "-comm:" + comm + "-port:" + port)
             try:
@@ -134,7 +139,7 @@ class AddDev:
                     raise Exception("Error al obtener el numero de interfaces de red...")
                 file.write("\nInterfaces:" + t)
 
-                first = ""  # Primer Interfaz de Red 'Up'
+                first = ''  # Primer Interfaz de Red 'Up'
                 file.write("\n¡")
                 n = int(t)
                 if n < 6:
@@ -154,7 +159,7 @@ class AddDev:
                         raise Exception("Error al obtener el estado administrativo de una interfaz de red...")
                     file.write(t)
 
-                    if int(t) == 1 and first == "":
+                    if int(t) == 1 and first == '':
                         first = str(x)
 
                 file.write("\n&" + first)
