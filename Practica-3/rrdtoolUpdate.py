@@ -33,13 +33,12 @@ if os.path.exists(os.path.join(os.getcwd(), "Databases")):
                     ramUsed = consulta(comm, ip, port, "1.3.6.1.2.1.25.2.3.1.6.1")
                     cachUsed = consulta(comm, ip, port, "1.3.6.1.2.1.25.2.3.1.6.7")
                     hddUsed = consulta(comm, ip, port, "1.3.6.1.2.1.25.2.3.1.6.36")
-                    if ifInUcastPkts == "" or ipInReceives == "" or icmpOutEchos == "" or tcpInSegs == "" or udpInDatagrams == "":
+                    if ifInUcastPkts == "error" or ipInReceives == "error" or icmpOutEchos == "error" or tcpInSegs == "error" or udpInDatagrams == "error" or procLoad == "error" or ramUsed == "error" or cachUsed == "error" or hddUsed == "error":
                         raise Exception("Error al hacer las consultas SNMP...")
-                    valor = "N:" + ifInUcastPkts + ":" + ipInReceives + ":" + icmpOutEchos + ":" + tcpInSegs + ":" + udpInDatagrams
+                    valor = "N:" + ifInUcastPkts + ":" + ipInReceives + ":" + icmpOutEchos + ":" + tcpInSegs + ":" + udpInDatagrams + ":" + procLoad + ":" + ramUsed + ":" + cachUsed + ":" + hddUsed
                     print(db + " - " + valor)
                     rrdtool.update(os.path.join(os.getcwd(), "Databases", db + ".rrd"), valor)
-                    rrdtool.dump(os.path.join(os.getcwd(), "Databases", db + ".rrd"), os.path.join(os.getcwd(), "Databases", db + ".xml"))
-                    time.sleep(1)
+                    time.sleep(5)
                 except Exception as e:
                     if e == KeyboardInterrupt:
                         raise Exception("Se cancelo la ejecucion del programa...")
