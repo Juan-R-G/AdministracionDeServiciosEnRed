@@ -193,7 +193,7 @@ class Report:
                 file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
                 content = [f.replace("\n", "") for f in file]
                 file.close()
-                title = ["Administracion de Servicios en Red", "Practica 1", "Juan Roldan Gomez    4CM14"]
+                title = ["Administracion de Servicios en Red", "Practica 1", "Juan Roldan Gomez            4CM14"]
                 info = []
                 t = content[0].split('-')
                 x = t[0].split(':')
@@ -241,7 +241,7 @@ class Report:
                 file = open(os.path.join(os.getcwd(), "Dispositivos", self.eleccion.get() + ".txt"), "r")
                 content = [f.replace("\n", "") for f in file]
                 file.close()
-                title = ["Administracion de Servicios en Red", "Practica 2", "Juan Roldan Gomez    4CM14"]
+                title = ["Administracion de Servicios en Red", "Practica 2", "Juan Roldan Gomez            4CM14"]
                 info = []
                 t = content[0].split('-')
                 x = t[0].split(':')
@@ -268,6 +268,13 @@ class Report:
                         "tcpInSegs": "Segmentos TCP recibidos, incluyendo los recibidos con errores",
                         "udpInDatagrams": "Datagramas entregados a usuarios UDP"
                     }
+                    unidades = {
+                        "ifInUcastPkts": "Paquetes",
+                        "ipInReceives": "Paquetes",
+                        "icmpOutEchos": "Mensajes",
+                        "tcpInSegs": "Bytes",
+                        "udpInDatagrams": "Datagramas"
+                    }
                     nombres = {
                         "ifInUcastPkts": "Paquetes recibidos",
                         "ipInReceives": "Paquetes recibidos",
@@ -275,9 +282,16 @@ class Report:
                         "tcpInSegs": "Segmentos recibidos",
                         "udpInDatagrams": "Datagramas entregados"
                     }
+                    operacion = {
+                        "ifInUcastPkts": "",
+                        "ipInReceives": "",
+                        "icmpOutEchos": "",
+                        "tcpInSegs": ",8,*",
+                        "udpInDatagrams": ""
+                    }
                     for var in variables:
                         t = os.path.join(os.getcwd(), "Images", self.eleccion.get() + "(" + var + ").png")
-                        x = grafica(t, start, end, titulos[var], var, os.path.join(os.getcwd(), "Databases", self.eleccion.get()+".rrd"), nombres[var])
+                        x = grafica(t, start, end, titulos[var], unidades[var], var, os.path.join(os.getcwd(), "Databases", self.eleccion.get()+".rrd"), operacion[var], nombres[var])
                         if "Error" in x:
                             raise Exception(x)
                         modules.append([titulos[var], t])

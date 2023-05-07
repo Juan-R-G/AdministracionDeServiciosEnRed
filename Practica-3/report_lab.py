@@ -26,7 +26,7 @@ def reporte1(path, title, info, image, table):
         t.setStyle(TableStyle([
             ('ALIGN', (0, 0), (-1, -1), 'CENTRE'),
             ('FONT', (0, 0), (-1, -1), 'Helvetica'),
-            ('FONTSIZE', (0, 0), (-1, -1), '14'),
+            ('FONTSIZE', (0, 0), (-1, -1), 14),
             ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
             ('TEXTCOLOR', (1, 1), (-1, -1), colors.mediumblue),
             ('LINEBELOW', (0, 0), (-1, 0), 2, colors.black),
