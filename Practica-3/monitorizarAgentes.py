@@ -5,6 +5,7 @@ import rrdtool
 import datetime
 from snmp import consulta
 from rrdtoolGraph import grafica1, grafica2
+from enviarCorreo import enviar
 import time
 
 
@@ -66,20 +67,29 @@ class Supervisor:
                         self.lbl4.grid(columnspan=3, row=len(self.devices)+1)
                         if not self.CPUu3:
                             self.CPUu3 = 3
+                            self.CPUu2 = 0
+                            self.CPUu1 = 0
                     elif cpu > 75:  # Naranja
                         self.lbls[i][1] = ttk.Label(self.frm, text=str(cpu) + " %", foreground="orange")
                         self.lbl4 = ttk.Label(self.frm, text="El dispositivo " + self.devices[i] + " ha sobrepasado el segundo umbral respecto al uso del CPU\nSe recomienda formular un plan de accion\nSe ha enviado la notificacion por correo electronico")
                         self.lbl4.grid(columnspan=3, row=len(self.devices)+1)
                         if not self.CPUu2:
+                            self.CPUu3 = 0
                             self.CPUu2 = 3
+                            self.CPUu1 = 0
                     elif cpu > 60:  # Amarillo
                         self.lbls[i][1] = ttk.Label(self.frm, text=str(cpu) + " %", foreground="yellow")
                         self.lbl4 = ttk.Label(self.frm, text="El dispositivo " + self.devices[i] + " ha sobrepasado el primer umbral respecto al uso del CPU\nSe recomienda investigar\nSe ha enviado la notificacion por correo electronico")
                         self.lbl4.grid(columnspan=3, row=len(self.devices)+1)
                         if not self.CPUu1:
+                            self.CPUu3 = 0
+                            self.CPUu2 = 0
                             self.CPUu1 = 3
                     else:  # Verde
                         self.lbls[i][1] = ttk.Label(self.frm, text=str(cpu) + " %", foreground="green")
+                        self.CPUu3 = 0
+                        self.CPUu2 = 0
+                        self.CPUu1 = 0
                     self.lbls[i][1].grid(column=1, row=i+1)
                     if ram > 90:  # Rojo
                         self.lbls[i][2] = ttk.Label(self.frm, text=str(ram) + " %", foreground="red")
@@ -87,27 +97,36 @@ class Supervisor:
                         self.lbl5.grid(columnspan=3, row=len(self.devices)+2)
                         if not self.RAMu3:
                             self.RAMu3 = 3
+                            self.RAMu2 = 0
+                            self.RAMu1 = 0
                     elif ram > 75:  # Naranja
                         self.lbls[i][2] = ttk.Label(self.frm, text=str(ram) + " %", foreground="orange")
                         self.lbl5 = ttk.Label(self.frm, text="El dispositivo " + self.devices[i] + " ha sobrepasado el segundo umbral respecto al uso de la RAM\nSe recomienda formular un plan de accion\nSe ha enviado la notificacion por correo electronico")
                         self.lbl5.grid(columnspan=3, row=len(self.devices)+2)
                         if not self.RAMu2:
+                            self.RAMu3 = 0
                             self.RAMu2 = 3
+                            self.RAMu1 = 0
                     elif ram > 60:  # Amarillo
                         self.lbls[i][2] = ttk.Label(self.frm, text=str(ram) + " %", foreground="yellow")
                         self.lbl5 = ttk.Label(self.frm, text="El dispositivo " + self.devices[i] + " ha sobrepasado el primer umbral respecto al uso de la RAM\nSe recomienda investigar\nSe ha enviado la notificacion por correo electronico")
                         self.lbl5.grid(columnspan=3, row=len(self.devices)+2)
-                        if not self.RAMu2:
-                            self.RAMu2 = 3
+                        if not self.RAMu1:
+                            self.RAMu3 = 0
+                            self.RAMu2 = 0
+                            self.RAMu1 = 3
                     else:  # Verde
                         self.lbls[i][2] = ttk.Label(self.frm, text=str(ram) + " %", foreground="green")
+                        self.RAMu3 = 0
+                        self.RAMu2 = 0
+                        self.RAMu1 = 0
                     self.lbls[i][2].grid(column=2, row=i+1)
                     if self.CPUu3:
                         if self.CPUu3 == 3:
                             image = os.path.join(os.getcwd(), "Images", self.devices[i] + "(procLoad).png")
                             x = grafica1(image, int(time_stamp)-300, int(time_stamp), "(Sobrepaso del umbral 3)", os.path.join(os.getcwd(), "Databases", self.devices[i] + ".rrd"))
                             if x == "OK":
-                                pass
+                                enviar("ALERTA: UMBRAL 3 SOBREPASADO!", "El dispositivo " + self.devices[i] + " ha sobrepasado el tercer umbral respecto al uso del CPU 1. Se recomienda ejecutar un plan de accion.", image)
                             else:
                                 print("Error al obtener los recursos para enviar al correo: " + x)
                             self.CPUu3 -= 1
@@ -115,26 +134,56 @@ class Supervisor:
                             self.CPUu3 -= 1
                     elif self.CPUu2:
                         if self.CPUu2 == 3:
+                            image = os.path.join(os.getcwd(), "Images", self.devices[i] + "(procLoad).png")
+                            x = grafica1(image, int(time_stamp) - 300, int(time_stamp), "(Sobrepaso del umbral 2)", os.path.join(os.getcwd(), "Databases", self.devices[i] + ".rrd"))
+                            if x == "OK":
+                                enviar("ALERTA: UMBRAL 2 SOBREPASADO!", "El dispositivo " + self.devices[i] + " ha sobrepasado el segundo umbral respecto al uso del CPU 1. Se recomienda formular un plan de accion.", image)
+                            else:
+                                print("Error al obtener los recursos para enviar al correo: " + x)
                             self.CPUu2 -= 1
                         else:
                             self.CPUu2 -= 1
                     elif self.CPUu1:
                         if self.CPUu1 == 3:
+                            image = os.path.join(os.getcwd(), "Images", self.devices[i] + "(procLoad).png")
+                            x = grafica1(image, int(time_stamp) - 300, int(time_stamp), "(Sobrepaso del umbral 1)", os.path.join(os.getcwd(), "Databases", self.devices[i] + ".rrd"))
+                            if x == "OK":
+                                enviar("ALERTA: UMBRAL 1 SOBREPASADO!", "El dispositivo " + self.devices[i] + " ha sobrepasado el primer umbral respecto al uso del CPU 1. Se recomienda investigar.", image)
+                            else:
+                                print("Error al obtener los recursos para enviar al correo: " + x)
                             self.CPUu1 -= 1
                         else:
                             self.CPUu1 -= 1
                     if self.RAMu3:
                         if self.RAMu3 == 3:
+                            image = os.path.join(os.getcwd(), "Images", self.devices[i] + "(ramUsed).png")
+                            x = grafica2(image, int(time_stamp) - 300, int(time_stamp), "(Sobrepaso del umbral 3)", os.path.join(os.getcwd(), "Databases", self.devices[i] + ".rrd"), tram)
+                            if x == "OK":
+                                enviar("ALERTA: UMBRAL 3 SOBREPASADO!", "El dispositivo " + self.devices[i] + " ha sobrepasado el primer umbral respecto al uso de la RAM. Se recomienda ejecutar un plan de accion.", image)
+                            else:
+                                print("Error al obtener los recursos para enviar al correo: " + x)
                             self.RAMu3 -= 1
                         else:
                             self.RAMu3 -= 1
                     elif self.RAMu2:
                         if self.RAMu2 == 3:
+                            image = os.path.join(os.getcwd(), "Images", self.devices[i] + "(ramUsed).png")
+                            x = grafica2(image, int(time_stamp) - 300, int(time_stamp), "(Sobrepaso del umbral 2)", os.path.join(os.getcwd(), "Databases", self.devices[i] + ".rrd"), tram)
+                            if x == "OK":
+                                enviar("ALERTA: UMBRAL 2 SOBREPASADO!", "El dispositivo " + self.devices[i] + " ha sobrepasado el primer umbral respecto al uso de la RAM. Se recomienda formular un plan de accion.", image)
+                            else:
+                                print("Error al obtener los recursos para enviar al correo: " + x)
                             self.RAMu2 -= 1
                         else:
                             self.RAMu2 -= 1
                     elif self.RAMu1:
                         if self.RAMu1 == 3:
+                            image = os.path.join(os.getcwd(), "Images", self.devices[i] + "(ramUsed).png")
+                            x = grafica2(image, int(time_stamp) - 300, int(time_stamp), "(Sobrepaso del umbral 1)", os.path.join(os.getcwd(), "Databases", self.devices[i] + ".rrd"), tram)
+                            if x == "OK":
+                                enviar("ALERTA: UMBRAL 1 SOBREPASADO!", "El dispositivo " + self.devices[i] + " ha sobrepasado el primer umbral respecto al uso de la RAM. Se recomienda investigar.", image)
+                            else:
+                                print("Error al obtener los recursos para enviar al correo: " + x)
                             self.RAMu1 -= 1
                         else:
                             self.RAMu1 -= 1
