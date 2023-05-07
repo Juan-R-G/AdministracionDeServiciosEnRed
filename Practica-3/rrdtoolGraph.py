@@ -35,13 +35,15 @@ def grafica1(filename, time_start, time_end, db):  # Uso del Procesador 1
         return "Error al generar la grafica del uso del CPU 1: " + e.args[0]
 
 
-def grafica2(filename, time_start, time_end, db):  # Uso de la RAM
+def grafica2(filename, time_start, time_end, db, var):  # Uso de la RAM
     try:
         rrdtool.graph(filename, "--start", str(time_start), "--end", str(time_end),
                       "--vertical-label=Porcentaje", "--lower-limit", "0", "--upper-limit", "100",
-                      "--title=Uso de la RAM",
-                      "DEF:var1=" + db + ":" + var[0] + ":AVERAGE",
-                      "DEF:var2=" + db + ":" + var[1] + ":AVERAGE",
-                      "CDEF:var3=var1,100,*," + var[2] + ",/")
+                      "--title=Uso de la Memoria Fisica",
+                      "DEF:var1=" + db + ":ramUsed:AVERAGE",
+                      "DEF:var2=" + db + ":cachUsed:AVERAGE",
+                      "CDEF;var3=var1,100,*," + var + ",/",
+                      "CDEF:var4=var2,100,*," + var + ",/",
+                      "CDEF:var5=var3,var4,-")
     except Exception as e:
         print(e)
