@@ -1,7 +1,7 @@
 import rrdtool
 
 
-def grafica(filename, time_start, time_end, title, unit, var, db, op, name):
+def grafica(filename, time_start, time_end, title, unit, var, db, op, name):  # Reporte de Contabilidac
     try:
         rrdtool.graph(filename, "--start", str(time_start), "--end", str(time_end),
                       "--vertical-label=" + unit, "--title=" + title,
@@ -14,11 +14,11 @@ def grafica(filename, time_start, time_end, title, unit, var, db, op, name):
         return "Error al generar la grafica: " + e.args[0]
 
 
-def grafica1(filename, time_start, time_end, db):  # Uso del Procesador 1
+def grafica1(filename, time_start, time_end, title, db):  # Uso del Procesador 1
     try:
         rrdtool.graph(filename, "--start", str(time_start), "--end", str(time_end),
                       "--vertical-label=Porcentaje", "--lower-limit", "0", "--upper-limit", "100",
-                      "--title=Uso del CPU 1",
+                      "--title=Uso del CPU 1 " + title,
                       "DEF:var=" + db + ":procLoad:AVERAGE",
                       "VDEF:var1=var,MAXIMUM",
                       "VDEF:var2=var,MINIMUM",
@@ -35,11 +35,11 @@ def grafica1(filename, time_start, time_end, db):  # Uso del Procesador 1
         return "Error al generar la grafica del uso del CPU 1: " + e.args[0]
 
 
-def grafica2(filename, time_start, time_end, db, var):  # Uso de la RAM
+def grafica2(filename, time_start, time_end, title, db, var):  # Uso de la RAM
     try:
         rrdtool.graph(filename, "--start", str(time_start), "--end", str(time_end),
                       "--vertical-label=Porcentaje", "--lower-limit", "0", "--upper-limit", "100",
-                      "--title=Uso de la Memoria Fisica",
+                      "--title=Uso de la Memoria Fisica " + title,
                       "DEF:var1=" + db + ":ramUsed:AVERAGE",
                       "DEF:var2=" + db + ":cachUsed:AVERAGE",
                       "CDEF;var3=var1,100,*," + var + ",/",
