@@ -3,6 +3,7 @@ from tkinter import ttk
 from agregarDispositivo import AddDev
 from cambiarInformacion import ChInfo
 from eliminarDispositivo import DelDev
+from generarReporte import Report
 
 
 class Main:
@@ -45,6 +46,7 @@ class Main:
             Main()
         elif self.eleccion.get() == 4:
             self.menu.destroy()
+            Report()
             Main()
 
 

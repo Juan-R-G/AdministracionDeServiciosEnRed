@@ -44,6 +44,17 @@ def grafica2(filename, time_start, time_end, db, var):  # Uso de la RAM
                       "DEF:var2=" + db + ":cachUsed:AVERAGE",
                       "CDEF;var3=var1,100,*," + var + ",/",
                       "CDEF:var4=var2,100,*," + var + ",/",
-                      "CDEF:var5=var3,var4,-")
+                      "CDEF:var5=var3,var4,-",
+                      "VDEF:var6=var5,MAXIMUM",
+                      "VDEF:var7=var5,MINIMUM",
+                      "VDEF:var8=var5,AVERAGE",
+                      "VDEF:var9=var5,STDEV",
+                      "LINE3:var5#0000FF:RAM",
+                      "GPRINT:var6:%6.2lf %SMAX",
+                      "GPRINT:var7:%6.2lf %SMIN",
+                      "GPRINT:var8:%6.2lf %SAVG",
+                      "GPRINT:var9:%6.2lf %SSTDEV")
+        return "OK"
     except Exception as e:
         print(e)
+        return "Error al generar la grafica del uso de la Memoria Fisica: " + e.args[0]
