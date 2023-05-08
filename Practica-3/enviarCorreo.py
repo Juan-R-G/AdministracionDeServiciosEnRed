@@ -1,18 +1,20 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
+from email.mime.text import MIMEText
 
 
 def enviar(asunto, mensaje, imagen):
     de = "juan.0403.0112@gmail.com"
     para = "juan.0403.0112@gmail.com"
     mailserver = "smtp.gmail.com: 587"
-    contrasena = ""
+    contrasena = "rbrplklzlkdzrsbr"
     try:
         msg = MIMEMultipart()
         msg['Subject'] = asunto
         msg['From'] = de
         msg['To'] = para
+        msg.attach(MIMEText(mensaje, _subtype='plain', _charset='UTF-8'))
         f = open(imagen, "rb")
         img = MIMEImage(f.read())
         f.close()
