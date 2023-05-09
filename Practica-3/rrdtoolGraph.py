@@ -1,3 +1,4 @@
+# Roldan-Gomez-Juan
 import rrdtool
 
 
@@ -24,9 +25,9 @@ def grafica1(filename, time_start, time_end, title, db, umbral, color):  # Uso d
                       "VDEF:var2=var,MINIMUM",
                       "VDEF:var3=var,AVERAGE",
                       "VDEF:var4=var,STDEV",
-                      # "CDEF:var5=var," + umbral + ",GT,var,UN,IF",
-                      "LINE3:var#0000FF:CPU 1",
-                      # "LINE3:var5#" + color + ":Umbral Sobrepasado",
+                      "CDEF:var5=var," + umbral + ",GT,var,0,IF",
+                      "AREA:var#0000FF:CPU 1",
+                      "AREA:var5#" + color + ":Umbral Sobrepasado",
                       "GPRINT:var1:%6.2lf %SMAX",
                       "GPRINT:var2:%6.2lf %SMIN",
                       "GPRINT:var3:%6.2lf %SAVG",
@@ -51,9 +52,9 @@ def grafica2(filename, time_start, time_end, title, db, var, umbral, color):  # 
                       "VDEF:var7=var5,MINIMUM",
                       "VDEF:var8=var5,AVERAGE",
                       "VDEF:var9=var5,STDEV",
-                      # "CDEF:var10=var5," + umbral + ",GT,var5,UN,IF",
+                      # "CDEF:var10=var5," + umbral + ",GT,var5,0,IF",
                       "LINE3:var5#0000FF:RAM",
-                      # "LINE3:var10#" + color + ":Umbral Sobrepasado",
+                      # "AREA:var10#" + color + ":Umbral Sobrepasado",
                       "GPRINT:var6:%6.2lf %SMAX",
                       "GPRINT:var7:%6.2lf %SMIN",
                       "GPRINT:var8:%6.2lf %SAVG",
@@ -66,4 +67,5 @@ def grafica2(filename, time_start, time_end, title, db, var, umbral, color):  # 
 
 """ import os
 import datetime
-grafica2(os.path.join(os.getcwd(), "Images", "test.png"), int(datetime.datetime.now().timestamp())-120000, int(datetime.datetime.now().timestamp()), "Prueba", os.path.join(os.getcwd(), "Databases", "localhost.rrd"), 11625324, "xd", "00FF00") """
+grafica1(os.path.join(os.getcwd(), "Images", "cpuUmbrales.png"), int(datetime.datetime.now().timestamp())-50400, int(datetime.datetime.now().timestamp()), "Prueba", os.path.join(os.getcwd(), "Databases", "localhost.rrd"), "100", "00FF00")
+grafica2(os.path.join(os.getcwd(), "Images", "ramUmbrales.png"), int(datetime.datetime.now().timestamp())-50400, int(datetime.datetime.now().timestamp()), "Prueba", os.path.join(os.getcwd(), "Databases", "localhost.rrd"), 11625324, "100", "00FF00") """
