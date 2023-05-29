@@ -35,7 +35,31 @@ class Main:
         self.btn4.state(["!disabled"])
 
     def ping(self):
-        pass
+        pingw = Toplevel()
+        pingw.title("Ping")
+        pingw.resizable(False, False)
+        label1 = ttk.Label(pingw, text="Comprobando el estado de la red " + self.eleccion.get())
+        label1.grid(column=0, row=0)
+        comando = ""
+        if platform.system().lower() == "windows":
+            comando = "ping -n 1 -w 3 " + self.eleccion.get()
+        else:
+            comando = "ping -c 1 -w 3 www.google.com"
+        labels = []
+        r = 1
+
+        for i in range(0, 5):
+            labels.append(ttk.Label(pingw, text="Realizando el ping " + str(i+1) + "..."))
+            labels[r-1].grid(column=0, row=r)
+            self.menu.update()
+            r += 1
+            t = os.system(comando)
+            if t:
+                labels.append(ttk.Label(pingw, text="Ping Fallido.", foreground="red"))
+            else:
+                labels.append(ttk.Label(pingw, text="Ping Exitoso!", foreground="green"))
+            labels[r - 1].grid(column=0, row=r)
+            r += 1
 
     def generar(self):
         pass
@@ -48,6 +72,3 @@ class Main:
 
 
 Main()
-if platform.system().lower() == "linux":
-    t = os.system("ping -c 1 www.google.com")
-    print(t)
