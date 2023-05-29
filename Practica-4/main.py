@@ -62,7 +62,9 @@ class Main:
             r += 1
 
     def generar(self):
-        pass
+        generarw = Toplevel()
+        generarw.title("Generar la Configuracion")
+        generarw.resizable(False, False)
 
     def extraer(self):
         pass
