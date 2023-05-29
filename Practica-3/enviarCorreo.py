@@ -6,10 +6,10 @@ from email.mime.text import MIMEText
 
 
 def enviar(asunto, mensaje, imagen):
-    de = "juan.0403.0112@gmail.com"
-    para = "juan.0403.0112@gmail.com"
+    de = "@gmail.com"
+    para = "@gmail.com"
     mailserver = "smtp.gmail.com: 587"
-    contrasena = "rbrplklzlkdzrsbr"
+    contrasena = ""
     try:
         msg = MIMEMultipart()
         msg['Subject'] = asunto
