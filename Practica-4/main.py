@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import platform
 import os
+import telnetlib
 
 
 class Main:
@@ -65,6 +66,20 @@ class Main:
         generarw = Toplevel()
         generarw.title("Generar la Configuracion")
         generarw.resizable(False, False)
+        label1 = ttk.Label(generarw, text="Generando la configuracion de la red " + self.eleccion.get())
+        label1.grid(column=0, row=0)
+        self.menu.update()
+        up = "rcp"
+        tn = telnetlib.Telnet(self.eleccion.get())
+        print(tn.read_until(b"User: ").decode('ascii'))
+        tn.write(up.encode('ascii') + b"\n")
+        print(tn.read_until(b"Password: ").decode('ascii'))
+        tn.write(up.encode('ascii') + b"\n")
+        tn.write(b"enable\n")
+        tn.write(b"copy running-config startup-config\n")
+        tn.write(b"exit\n")
+        print(tn.read_all().decode('ascii'))
+        tn.close()
 
     def extraer(self):
         pass
