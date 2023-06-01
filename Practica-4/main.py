@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import platform
 import os
 import telnetlib
@@ -128,6 +129,16 @@ class Main:
                 sc.write(text1.get("1.0", END))
             ftp = FTP(self.eleccion.get())
             ftp.login("rcp", "rcp")
+            try:
+                with open('startup-config', 'rb') as sc:
+                    ftp.storbinary('STOR startup-config', sc)
+                ftp.quit()
+                importarw.destroy()
+                messagebox.showinfo("Exito", "Se actualizo correctamente el archivo startup-config de " + self.eleccion.get())
+            except Exception as e:
+                ftp.quit()
+                importarw.destroy()
+                messagebox.showerror("Error!", "Ocurrio un error al actualizar el archivo startup-config de " + self.eleccion.get() + "\n" + e.args[0])
 
         importarw = Toplevel()
         importarw.title("Importar la configuracion")
