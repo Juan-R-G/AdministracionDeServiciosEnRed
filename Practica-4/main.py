@@ -3,6 +3,7 @@ from tkinter import ttk
 import platform
 import os
 import telnetlib
+from ftplib import FTP
 
 
 class Main:
@@ -39,7 +40,7 @@ class Main:
         pingw = Toplevel()
         pingw.title("Ping")
         pingw.resizable(False, False)
-        label1 = ttk.Label(pingw, text="Comprobando el estado de la red " + self.eleccion.get(), relief=RAISED, padding=4)
+        label1 = ttk.Label(pingw, text="Comprobando el estado de la red " + self.eleccion.get(), relief=SUNKEN, padding=6)
         label1.grid(column=0, row=0)
         comando = ""
         if platform.system().lower() == "windows":
@@ -66,26 +67,84 @@ class Main:
         generarw = Toplevel()
         generarw.title("Generar la Configuracion")
         generarw.resizable(False, False)
-        label1 = ttk.Label(generarw, text="Generando la configuracion de la red " + self.eleccion.get() + "\n")
+        label1 = ttk.Label(generarw, text="Generando la configuracion de la red " + self.eleccion.get(), relief=SUNKEN, padding=6)
         label1.grid(column=0, row=0)
         self.menu.update()
         up = "rcp"
         tn = telnetlib.Telnet(self.eleccion.get())
-        print(tn.read_until(b"User: ").decode('ascii'))
+        tt = ""
+        tt += tn.read_until(b"User: ").decode('ascii')
         tn.write(up.encode('ascii') + b"\n")
-        print(tn.read_until(b"Password: ").decode('ascii'))
+        tt += tn.read_until(b"Password: ").decode('ascii')
         tn.write(up.encode('ascii') + b"\n")
         tn.write(b"enable\n")
+        tn.write(b"show clock\n")
         tn.write(b"copy running-config startup-config\n")
         tn.write(b"exit\n")
-        print(tn.read_all().decode('ascii'))
+        tt += tn.read_all().decode('ascii')
         tn.close()
+        label2 = ttk.Label(generarw, text=tt)
+        label2.grid(column=0, row=1)
 
     def extraer(self):
-        pass
+        extraerw = Toplevel()
+        extraerw.title("Extraer la Configuracion")
+        extraerw.resizable(False, False)
+        label1 = ttk.Label(extraerw, text="Obtiendo el archivo startup-config de " + self.eleccion.get(), relief=SUNKEN, padding=6)
+        label1.grid(columnspan=2, row=0)
+        ftp = FTP(self.eleccion.get())
+        ftp.login("rcp", "rcp")
+        data = []
+        ftp.dir(data.append)
+        flag = False
+        for d in data:
+            if "startup-config" in d:
+                flag = True
+                break
+        if flag:
+            with open('startup-config', 'wb') as sc:
+                ftp.retrbinary('RETR startup-config', sc.write)
+            label2 = ttk.Label(extraerw, text="\nSe guardo con exito el archivo startup-config:\n", foreground="green")
+            label2.grid(columnspan=2, row=1)
+            st = ""
+            with open('startup-config', 'r') as sc:
+                st = sc.read()
+            scrbar1 = ttk.Scrollbar(extraerw, orient=VERTICAL)
+            scrbar1.grid(column=1, row=2, sticky="NS")
+            text1 = Text(extraerw, yscrollcommand=scrbar1.set)
+            text1.insert(INSERT, st)
+            text1.config(state=DISABLED)
+            scrbar1.config(command=text1.yview)
+            text1.grid(column=0, row=2)
+
+        else:
+            label2 = ttk.Label(extraerw, text="\nNo se pudo extraer el archivo startup-config", foreground="red")
+            label2.grid(columnspan=2, row=1)
+        ftp.quit()
 
     def importar(self):
-        pass
+        def enviar():
+            with open('startup-config', 'w') as sc:
+                sc.write(text1.get("1.0", END))
+            ftp = FTP(self.eleccion.get())
+            ftp.login("rcp", "rcp")
+
+        importarw = Toplevel()
+        importarw.title("Importar la configuracion")
+        importarw.resizable(False, False)
+        label1 = ttk.Label(importarw, text="Edite el nuevo archivo startup-config para " + self.eleccion.get() + "\n")
+        label1.grid(columnspan=2, row=0)
+        st = ""
+        with open('startup-config', 'r') as sc:
+            st = sc.read()
+        scrbar1 = ttk.Scrollbar(importarw, orient=VERTICAL)
+        scrbar1.grid(column=1, row=1, sticky="NS")
+        text1 = Text(importarw, yscrollcommand=scrbar1.set)
+        text1.insert(INSERT, st)
+        scrbar1.config(command=text1.yview)
+        text1.grid(column=0, row=1)
+        btn1 = ttk.Button(importarw, text="Actualizar\nstartup-config", command=lambda: enviar())
+        btn1.grid(columnspan=2, row=2)
 
 
 Main()
